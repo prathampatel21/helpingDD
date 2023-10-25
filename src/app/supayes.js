@@ -44,5 +44,22 @@ async function fetchUsers() {
     }
 }
 
-insertUser(5, "tryingparamSub")
-fetchUsers();
+async function createRequest(id, start=null, end=null, order_info=null, status="active", dorm, requester, deliverer=null) {
+
+    try {
+        const { data, error } = await supabase
+        .from('Requests')
+        .insert([{id: id, start: start, end: end, order_info: order_info, status: status, dorm: dorm, requester: requester, deliverer: deliverer}])      
+        if (error) {
+            console.error('Error fetching data:', error);
+        } else {
+            console.log('Request inserted successfully:', data);
+        }
+    } catch (error) {
+        console.error('Error inserting data:', error);
+    }
+}
+
+//insertUser(5, "tryingparamSub")
+//fetchUsers();
+//createRequest(1, "chase", "hojo", null, "active", "hojo", "auggie")
