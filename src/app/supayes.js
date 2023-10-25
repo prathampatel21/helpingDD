@@ -41,5 +41,5 @@ async function fetchUsers() {
     }
 }
 
-insertData(5,tname='sub5', tcontact='5sub@gma',tcompleted_orders='5asdfjlks');
-fetchData();
+insertUser(5,tname='sub5', tcontact='5sub@gma',tcompleted_orders='5asdfjlks');
+fetchUser();
