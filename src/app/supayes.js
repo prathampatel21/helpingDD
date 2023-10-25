@@ -60,6 +60,23 @@ async function createRequest(id, start=null, end=null, order_info=null, status="
     }
 }
 
+async function acceptRequest(id, deliverer) {
+
+    try {
+        const { data, error } = await supabase
+        .from('Requests')
+        .update({status: "accepted", deliverer: deliverer})  
+        .eq('id', id);    
+        if (error) {
+            console.error('Error accepting request:', error);
+        } else {
+            console.log('Request accepted successfully:', data);
+        }
+    } catch (error) {
+        console.error('Error accepting request:', error);
+    }
+}
+
 //insertUser(5, "tryingparamSub")
 //fetchUsers();
 //createRequest(1, "chase", "hojo", null, "active", "hojo", "auggie")
