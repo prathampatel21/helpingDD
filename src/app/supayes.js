@@ -3,7 +3,7 @@ import { createClient } from '@supabase/supabase-js';
 const supabase = createClient('https://yxxeykqqytazrtqgekup.supabase.co', "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inl4eGV5a3FxeXRhenJ0cWdla3VwIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTY5ODE2NDg3MiwiZXhwIjoyMDEzNzQwODcyfQ.d6NTLLcurXktkX1Su_uXU24nW-AwwZ2lmrqC2-ccvXQ");
 
 
-async function insertData(tid, tname, tpoints=0, tcontact=null, thelper=null, tcompleted_orders=null, tin_progress=null) {
+async function insertUsers(tid, tname, tpoints=0, tcontact=null, thelper=null, tcompleted_orders=null, tin_progress=null) {
 
     try {
         const { data, error } = await supabase
@@ -22,7 +22,7 @@ async function insertData(tid, tname, tpoints=0, tcontact=null, thelper=null, tc
     }
 }
 
-async function fetchData() {
+async function fetchUsers() {
 
     try {
         const { data, error } = await supabase
