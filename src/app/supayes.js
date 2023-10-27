@@ -187,6 +187,21 @@ async function getRequestsByRequester(requesterName) {
     }
 }
 
+async function fetchLeaderboard() {
+
+    try {
+        const { data, error } = await supabase
+        .rpc('sort_users_by_points', {}) 
+        if (error) {
+            console.error('Error getting leaderboard:', error);
+        } else {
+            console.log('Leaderboard:', data);
+        }
+    } catch (error) {
+        console.error('Error getting leaderboard:', error);
+    }
+}
+
 //insertUser(5, "tryingparamSub")
 //fetchUsers();
 //createRequest(1, "chase", "hojo", null, "active", "hojo", "auggie")
