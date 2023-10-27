@@ -77,6 +77,116 @@ async function acceptRequest(id, deliverer) {
     }
 }
 
+async function finishRequest(id) {
+
+    try {
+        const { data, error } = await supabase
+        .from('Requests')
+        .update({status: "completed"})  
+        .eq('id', id);    
+        if (error) {
+            console.error('Error finishing request:', error);
+        } else {
+            console.log('Request finished:', data);
+        }
+    } catch (error) {
+        console.error('Error finishing request:', error);
+    }
+}
+
+async function addPoints(x_id, x) {
+
+    try {
+        const { data, error } = await supabase
+        .rpc('increments', {i: x_id, pts: x}) 
+        if (error) {
+            console.error('Error adding points:', error);
+        } else {
+            console.log('Points added:', data);
+        }
+    } catch (error) {
+        console.error('Error adding points:', error);
+    }
+}
+
+async function fetchRequests() {
+
+    try {
+        const { data, error } = await supabase
+        .from('Requests')
+        .select('*')      
+        if (error) {
+            console.error('Error fetching data:', error);
+        } else {
+            console.log('Data fetched successfully:', data);
+            data.forEach(request => {
+                console.log('Request ID:', request.id);
+                console.log('Request Info:', request.order_info)
+                console.log('Request Status:', request.status);})
+        }
+    } catch (error) {
+        console.error('Error fetching requests:', error);
+    }
+}
+
+async function getNameById(id) {
+    try {
+        const { data, error } = await supabase
+            .from('Users')
+            .select('name')
+            .eq('id', id)
+            .single();
+
+        if (error) {
+            console.error('Error fetching user name:', error);
+            return null;
+        } else {
+            return data.name;
+        }
+    } catch (error) {
+        console.error('Error fetching user name:', error);
+        return null;
+    }
+}
+
+async function getRequests(delivererName) {
+    try {
+        const { data, error } = await supabase
+            .from('Requests')
+            .select('*')
+            .eq('deliverer', delivererName);
+
+        if (error) {
+            console.error('Error fetching requests:', error);
+            return null;
+        } else {
+            return data;
+        }
+    } catch (error) {
+        console.error('Error fetching requests:', error);
+        return null;
+    }
+}
+
+async function getRequestsByRequester(requesterName) {
+    try {
+        const { data, error } = await supabase
+            .from('Requests')
+            .select('*')
+            .eq('requester', requesterName);
+
+        if (error) {
+            console.error('Error fetching requests:', error);
+            return null;
+        } else {
+            return data;
+        }
+    } catch (error) {
+        console.error('Error fetching requests:', error);
+        return null;
+    }
+}
+
 //insertUser(5, "tryingparamSub")
 //fetchUsers();
 //createRequest(1, "chase", "hojo", null, "active", "hojo", "auggie")
