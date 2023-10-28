@@ -65,7 +65,7 @@ async function acceptRequest(id, deliverer) {
     try {
         const { data, error } = await supabase
         .from('Requests')
-        .update({status: "accepted", deliverer: deliverer})  
+        .update({status: "in-progress", deliverer: deliverer})  
         .eq('id', id);    
         if (error) {
             console.error('Error accepting request:', error);
