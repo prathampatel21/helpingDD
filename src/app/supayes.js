@@ -129,6 +129,27 @@ async function fetchRequests() {
     }
 }
 
+async function fetchOpenRequests() {
+
+    try {
+        const { data, error } = await supabase
+        .from('Requests')
+        .select('*')
+        .eq('status', 'open')  
+        if (error) {
+            console.error('Error fetching data:', error);
+        } else {
+            console.log('Data fetched successfully:', data);
+            data.forEach(request => {
+                console.log('Request ID:', request.id);
+                console.log('Request Info:', request.order_info)
+                console.log('Request Status:', request.status);})
+        }
+    } catch (error) {
+        console.error('Error fetching requests:', error);
+    }
+}
+
 async function getNameById(id) {
     try {
         const { data, error } = await supabase
